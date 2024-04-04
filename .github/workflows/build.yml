@@ -7,16 +7,14 @@ on:
 
 jobs:
   release:
+    permissions: write-all
     runs-on: ${{ matrix.os }}
-
     strategy:
       matrix:
         os: [windows-latest]
-
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
-
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v3
         with:
