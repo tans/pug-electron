@@ -1,23 +1,44 @@
-const { app, BrowserWindow } = require('electron');
-const path = require('node:path');
-
+const { app, BrowserWindow, Menu } = require("electron");
+const path = require("node:path");
+const { data } = require("./shared");
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require('electron-squirrel-startup')) {
+if (require("electron-squirrel-startup")) {
   app.quit();
 }
+
+const Wechaty = require("wechaty");
+const { PuppetXp } = require("wechaty-puppet-xp");
+const { WechatyBuilder } = Wechaty;
+const puppet = new PuppetXp();
+const bot = require("./bot");
+const botInstance = WechatyBuilder.build({
+  puppet: puppet,
+  name: "bot",
+});
+
+let util = require("./util");
+data.set({
+  sended: 0,
+  received: 0,
+  host: util.getHost(),
+});
 
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 300,
+    height: 200,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, "preload.js"),
+      backgroundThrottling: false, // 禁用后台节流
+      sandbox: false,
     },
   });
 
+  // Menu.setApplicationMenu(null);
+
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, 'index.html'));
+  mainWindow.loadFile(path.join(__dirname, "index.html"));
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
@@ -29,9 +50,11 @@ const createWindow = () => {
 app.whenReady().then(() => {
   createWindow();
 
+  bot.load(botInstance);
+
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  app.on('activate', () => {
+  app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
     }
@@ -41,8 +64,8 @@ app.whenReady().then(() => {
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
     app.quit();
   }
 });

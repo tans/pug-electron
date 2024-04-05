@@ -1,12 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Hello World!</title>
+    <title>微信机器人</title>
     <link rel="stylesheet" href="index.css" />
   </head>
-  <body>
-    <h1>💖 Hello World!</h1>
-    <p>Welcome to your Electron application.</p>
+  <body class="bg-green-900 p-4 text-sm leading-9 text-gray-100">
+    <div>服务器: <a id="host"></a></div>
+    <div class="flex items-center">
+      <div>收：</div>
+      <div id="received"></div>
+    </div>
+    <div class="flex items-center">
+      <div>发：</div>
+      <div id="sended"></div>
+    </div>
   </body>
 </html>
