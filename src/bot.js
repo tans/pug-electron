@@ -41,7 +41,7 @@ async function startLoop(bot) {
   }, 2000);
 }
 
-module.export = {
+module.exports = {
   load: async (bot) => {
     bot.on("login", async (user) => {
       _user = user;
@@ -73,5 +73,8 @@ module.export = {
         date: msg.date(),
       });
     });
+
+
+    bot.start().then(console.log).catch(console.error)
   },
 };

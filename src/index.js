@@ -10,6 +10,7 @@ let util = require("./util");
 data.set({
   sended: 0,
   received: 0,
+  account:'',
   host: util.getHost(),
 });
 
@@ -50,7 +51,9 @@ app.whenReady().then(() => {
       puppet: puppet,
       name: "bot",
     });
-    bot.load(botInstance);
+
+    console.log(bot)
+    bot.load(botInstance).then();
   }
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
