@@ -1,7 +1,7 @@
 {
   "name": "pugai-bot",
   "productName": "pugai-bot",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "My Electron application description",
   "main": "src/index.js",
   "scripts": {
