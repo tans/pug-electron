@@ -37,6 +37,6 @@
     "electron-store": "^8.2.0",
     "node-fetch": "^2.7.0",
     "wechaty": "^1.20.2",
-    "wechaty-puppet-xp": "git@github.com:tans/puppet-xp.git"
+    "wechaty-puppet-xp": "1.13.12"
   }
 }
