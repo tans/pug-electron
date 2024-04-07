@@ -46,6 +46,7 @@ module.export = {
     bot.on("login", async (user) => {
       _user = user;
       data.set("botid", user.id);
+      data.set("account", user.name());
       await startLoop(bot);
     });
 

@@ -6,16 +6,6 @@ if (require("electron-squirrel-startup")) {
   app.quit();
 }
 
-const Wechaty = require("wechaty");
-const { PuppetXp } = require("wechaty-puppet-xp");
-const { WechatyBuilder } = Wechaty;
-const puppet = new PuppetXp();
-const bot = require("./bot");
-const botInstance = WechatyBuilder.build({
-  puppet: puppet,
-  name: "bot",
-});
-
 let util = require("./util");
 data.set({
   sended: 0,
@@ -50,8 +40,18 @@ const createWindow = () => {
 app.whenReady().then(() => {
   createWindow();
 
-  bot.load(botInstance);
-
+  if (process.platform !== "darwin") {
+    const Wechaty = require("wechaty");
+    const { PuppetXp } = require("wechaty-puppet-xp");
+    const { WechatyBuilder } = Wechaty;
+    const puppet = new PuppetXp();
+    const bot = require("./bot");
+    const botInstance = WechatyBuilder.build({
+      puppet: puppet,
+      name: "bot",
+    });
+    bot.load(botInstance);
+  }
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   app.on("activate", () => {
