@@ -1,4 +1,5 @@
-const fetch = require("node-fetch");
+// const fetch = require("node-fetch");
+const request = require("./request");
 const Task = require("./task");
 let _messages = [];
 let _user = null;
@@ -9,8 +10,7 @@ async function startLoop(bot) {
   setInterval(function () {
     (async () => {
       try {
-        let res = await fetch(data.get("host") + "/api/task");
-        let { task } = res.json();
+        let { task } = await request("/api/task");
         await Task.send(bot, task);
       } catch (error) {
         console.log(error);
@@ -45,6 +45,7 @@ module.export = {
   load: async (bot) => {
     bot.on("login", async (user) => {
       _user = user;
+      data.set("botid", user.id);
       await startLoop(bot);
     });
 
