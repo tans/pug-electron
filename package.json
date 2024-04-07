@@ -32,15 +32,11 @@
   },
   "license": "MIT",
   "dependencies": {
-    "brolog": "^1.14.2",
     "dotenv": "^16.4.5",
     "electron-squirrel-startup": "^1.0.0",
     "electron-store": "^8.2.0",
     "node-fetch": "^2.7.0",
-    "redux": "^5.0.1",
-    "rxjs": "^7.8.1",
-    "typesafe-actions": "^5.1.0",
     "wechaty": "^1.20.2",
-    "wechaty-puppet-xp": "^1.12.7"
+    "wechaty-puppet-xp": "git@github.com:tans/puppet-xp.git"
   }
 }
